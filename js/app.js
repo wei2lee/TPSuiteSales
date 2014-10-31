@@ -74,10 +74,10 @@ app.controller('BookingFormController', function ($scope, $http, localStorageSer
         }
     });
     self.getTotalInterest = function () {
-        return self.getAmount() * InterestRatePerYear * InterestYearNumber * self.getCurrencyRate();
+        return self.getAmount() * InterestRatePerYear * InterestYearNumber * 1/self.getCurrencyRate();
     }
     self.getInterestPerYear = function () {
-        return self.getAmount() / InterestRatePerYear;
+        return self.getTotalInterest() / InterestYearNumber;
     }
     self.getTotalReturn = function () {
         return self.getAmount() + self.getTotalInterest();
@@ -111,7 +111,7 @@ app.controller('BookingFormController', function ($scope, $http, localStorageSer
     for (var i = 0; i < 4; i++) {
         self.payments.push({});
         self.payments[i].paymentType = 'N/A';
-        self.payments[i].paymentAmount = 0;
+        self.payments[i].paymentAmount = '';
         self.payments[i].paymentCCType = '';
         self.payments[i].paymentReferenceNo = '';
     }
@@ -175,29 +175,3 @@ app.controller('UnitsController', function ($scope, $http, localStorageService) 
         }
     });
 }); //*/
-
-
-
-
-
-/*
-
-<embed
-    type="application/pdf"
-    src="path_to_pdf_document.pdf"
-    id="pdfDocument"
-    width="100%"
-    height="100%">
-</embed>
-Then you call the .print() method on the element in Javascript when the PDF is loaded:
-
-function printDocument(documentId) {
-    var doc = document.getElementById(documentId);
-
-    //Wait until PDF is ready to print    
-    if (typeof doc.print === 'undefined') {    
-        setTimeout(function(){printDocument(documentId);}, 1000);
-    } else {
-        doc.print();
-    }
-}//*/

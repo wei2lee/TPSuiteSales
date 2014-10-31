@@ -136,7 +136,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="name">Name *</label>
                                 <div class="col-md-6">
-                                    <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="" ng-model="booking.name">
+                                    <input id="name" name="name" type="text" placeholder="" class="form-control input-md"  ng-model="booking.name">
 
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="nric">NRIC/Password *</label>
                                 <div class="col-md-6">
-                                    <input id="nric" name="nric" type="text" placeholder="" class="form-control input-md" required="" ng-model="booking.nric">
+                                    <input id="nric" name="nric" type="text" placeholder="" class="form-control input-md"  ng-model="booking.nric">
 
                                 </div>
                             </div>
@@ -281,10 +281,10 @@
                                 <div class="col-md-2">
                                     <input disabled id="earnestDepositAmount" name="earnestDepositAmount" type="text" placeholder="" class="form-control input-md" value="{{booking.getEarnestDepositAmount() | currency:'':2}}">
                                 </div>
-                                <label class="col-md-2 control-label" for="earnestDeposit">Earnest Deposit</label>
+                                <label class="col-md-2 control-label" for="earnestDepositDate">Date</label>
                                 <div class="col-md-2">
                                     <div class='input-group date datetimepicker'>
-                                        <input type='text' name='dob' class="form-control" required="" ng-model="booking.earnestDepositDate" />
+                                        <input type='text' name='earnestDepositDate' class="form-control" ng-model="booking.earnestDepositDate" />
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
@@ -299,9 +299,9 @@
                                 <div class="col-md-9">
                                     <div class="form-group " ng-repeat='payment in booking.payments'>
 
-                                        <label class="col-xs-1 control-label" for="{{paymentType + ($index+1)}}">{{$index+1}})</label>
+                                        <label class="col-xs-1 control-label" for="{{'paymentType' + ($index+1)}}">{{$index+1}})</label>
                                         <div class="col-xs-3">
-                                            <select disable-search id="{{paymentType + ($index+1)}}" name="{{paymentType + ($index+1)}}" class="form-control" ng-model='payment.paymentType'>
+                                            <select disable-search id="{{'paymentType' + ($index+1)}}" name="{{'paymentType' + ($index+1)}}" class="form-control" ng-model='payment.paymentType'>
                                                 <option value="N/A">N/A</option>
                                                 <option value="Cash">Cash</option>
                                                 <option value="Cheque">Cheque</option>
@@ -312,11 +312,11 @@
                                             </select>
                                         </div>
                                         <div class="col-xs-2">
-                                            <input id="{{paymentAmount + ($index+1)}}" name="{{paymentAmount + ($index+1)}}" type="text" placeholder="" class="form-control input-md" ng-model="payment.paymentAmount">
+                                            <input id="{{paymentAmount + ($index+1)}}" name="{{'paymentAmount' + ($index+1)}}" type="text" placeholder="" class="form-control input-md" ng-model="payment.paymentAmount">
                                         </div>
 
                                         <div class="col-xs-2">
-                                            <select disable-search id="{{paymentCCType + ($index+1)}}" name="{{paymentCCType + ($index+1)}}" class="form-control" ng-model='payment.paymentCCType'>
+                                            <select disable-search id="{{'paymentCCType' + ($index+1)}}" name="{{'paymentCCType' + ($index+1)}}" class="form-control" ng-model='payment.paymentCCType'>
                                                 <option value=""></option>
                                                 <option value="Cash">Master</option>
                                                 <option value="Cheque">Visa</option>
@@ -326,7 +326,7 @@
                                             </select>
                                         </div>
                                         <div class="col-xs-3">
-                                            <input id="{{paymentReferenceNo + ($index+1)}}" name="{{paymentReferenceNo + ($index+1)}}" type="text" placeholder="" class="form-control input-md" value='{{payment.paymentReferenceNo}}'>
+                                            <input id="{{'paymentReferenceNo' + ($index+1)}}" name="{{'paymentReferenceNo' + ($index+1)}}" type="text" placeholder="" class="form-control input-md" value='{{payment.paymentReferenceNo}}'>
                                         </div>
 
 

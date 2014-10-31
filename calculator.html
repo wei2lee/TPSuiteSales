@@ -92,7 +92,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="amount">Amount</label>
                                 <div class="col-md-4">
-                                    <input disabled id="amount" name="amount" type="text" placeholder="" class="form-control input-md" value='{{ booking.getAmount() | currency:"":2 }}'>
+                                    <input disabled id="amount" name="amount" type="text" placeholder="" class="form-control input-md" value='{{ booking.getAmount() | currency:booking.currency+" ":2 }}'>
                                 </div>
                             </div>
 
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="return">Return 6%<br><small>(1st-5th year)</small></label>
                                 <div class="col-md-4">
-                                    <input disabled id="return" name="return" type="text" placeholder="" class="form-control input-md" value='{{ booking.getTotalInterest() | currency:"":2 }}'>
+                                    <input disabled id="return" name="return" type="text" placeholder="" class="form-control input-md" value='{{ booking.getTotalInterest() | currency:booking.currency+" ":2 }}'>
 
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="interest">Interest</label>
                                 <div class="col-md-4">
-                                    <input disabled id="interest" name="interest" type="text" placeholder="" class="form-control input-md" value='{{ booking.getInterestPerYear() | currency:"":2 }}'>
+                                    <input disabled id="interest" name="interest" type="text" placeholder="" class="form-control input-md" value='{{ booking.getInterestPerYear() | currency:booking.currency+" ":2 }}'>
 
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="total-return">Total Return</label>
                                 <div class="col-md-4">
-                                    <input disabled id="total-return" name="total-return" type="text" placeholder="" class="form-control input-md" value='{{ booking.getTotalReturn() | currency:"":2 }}'>
+                                    <input disabled id="total-return" name="total-return" type="text" placeholder="" class="form-control input-md" value='{{ booking.getTotalReturn() | currency:booking.currency+" ":2 }}'>
 
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="back-btn"></label>
                                 <div class="col-md-8">
-                                    <a id="back-btn" name="back-btn" class="btn btn-default" href="available.html">Back</a>
+<!--                                    <a id="back-btn" name="back-btn" class="btn btn-default" href="available.html">Back</a>-->
                                     <a id="proceed-btn" name="proceed-btn" class="btn btn-default" href="form.html">Proceed</a>
                                 </div>
                             </div>

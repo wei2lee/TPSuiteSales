@@ -121,7 +121,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="amount">Amount</label>
                                 <div class="col-md-6">
-                                    <input disabled id="amount" name="amount" type="text" placeholder="" class="form-control input-md" value='{{booking.getAmount() | currency:"":2}}'>
+                                    <input disabled id="amount" name="amount" type="text" placeholder="" class="form-control input-md" value='{{booking.getAmount() | currency:booking.currency+" ":2}}'>
                                 </div>
                             </div>
                             <!-- Select Basic -->
