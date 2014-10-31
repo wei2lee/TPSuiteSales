@@ -7,35 +7,30 @@ var InterestRatePerYear = 0.06;
 var InterestYearNumber = 5;
 var SQF = 20;
 
-function groupOfKey(arr, key) {
-    var ret = {};
-    for (var i = 0; i < arr.length; i++) {
-        var keyval = arr[i][key];
-        if (!ret[keyval]) ret[keyval] = [];
-        ret[keyval].push(arr[i]);
+var app = angular.module('TPSuiteSalesApp', []);
+
+app.controller('UserController', function ($scope, $http) {
+    var storeduser = store('user');
+    if (!storeuser) {
+        storeuser = {
+            UserName: '',
+            UserID: 0,
+            Name: ''
+        };
     }
-    return ret;
-}
+    this.user = storeuser;
+});
 
-function arrayOfKey(arr, key) {
-    var ret = [];
-    for (arrkey in arr) {
-        ret.push(arr[arrkey][key]);
-    }
-    return ret;
-}
+app.controller('BookingFormController', function ($scope, $http) {
+    var booking = store('booking');
+    if (booking == null) booking = {};
+    if (booking.totalLot == undefined) booking.totalLot = 1;
+    if (booking.currency == undefined) booking.currency = 'MYR';
+    if (booking.nationality == undefined) booking.nationality = 'Malaysian';
+    store('booking', booking);
 
-var app = angular.module('TPSuiteSalesApp', ['LocalStorageModule']);
-app.controller('BookingFormController', function ($scope, $http, localStorageService) {
-    var self = this;
-    /*
-    localStorageService.set('totalLot', 1);
-    localStorageService.bind(this, 'totalLot', 1, 'totalLot');
-    localStorageService.bind(this, 'nationality', 'Malaysian');
-    localStorageService.bind(this, 'currency', 'MYR');
-    localStorageService.bind(this, 'availableLotCounts', {'Malaysian':0,'Foreginer':0});
-    //*/
 
+    var self = $scope;
     self.getCurrencyRate = function () {
         return {
             'MYR': 1,
@@ -46,9 +41,9 @@ app.controller('BookingFormController', function ($scope, $http, localStorageSer
     self.getAmount = function () {
         return 1 / self.getCurrencyRate() * PricePerLot * self.totalLot;
     }
-    this.totalLot = 1;
-    this.currency = 'MYR';
-    this.nationality = 'Malaysian';
+    self.totalLot = parseInt(store('booking').totalLot);
+    self.currency = store('booking').currency;
+    self.nationality = store('booking').nationality;
 
     self.conversionRate = 2.5;
     $http.get('http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22SGDMYR%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=').
@@ -61,7 +56,7 @@ app.controller('BookingFormController', function ($scope, $http, localStorageSer
         return self.availableLotCounts[self.nationality];
     }
 
-    this.availableLotCounts = {
+    self.availableLotCounts = {
         'Malaysian': 0,
         'Foreginer': 0
     };
@@ -74,7 +69,7 @@ app.controller('BookingFormController', function ($scope, $http, localStorageSer
         }
     });
     self.getTotalInterest = function () {
-        return self.getAmount() * InterestRatePerYear * InterestYearNumber * 1/self.getCurrencyRate();
+        return self.getAmount() * InterestRatePerYear * InterestYearNumber * 1 / self.getCurrencyRate();
     }
     self.getInterestPerYear = function () {
         return self.getTotalInterest() / InterestYearNumber;
@@ -117,37 +112,35 @@ app.controller('BookingFormController', function ($scope, $http, localStorageSer
     }
 
     self.remark = '';
-    self.soldBy = 0;
+    self.soldBy = store('user').UserID;
     self.getSoldByName = function () {
-        return '';
+        return store('user').UserName;
     };
+
+    $scope.saveData = function () {
+        store('booking', self);
+    }
+    $scope.getData = function () {
+        return self;
+    }
 });
 
-
-app.controller('UnitsController', function ($scope, $http, localStorageService) {
+app.controller('UnitsController', function ($scope, $http) {
     var self = this;
-
-    //self.salesId = undefined;
-    //self.userId = undefined;
-
-    //hardcode test data
-    //self.salesId = 31;
-    self.userId = 31;
-
+    self.salesID = store('salesID');
+    self.user = store('user');
+    
     self.units = [];
     self.lots = [];
 
-
     var url = '';
     var id = '';
-
-
-    if (self.salesId !== undefined) {
+    if (self.salesID !== undefined && self.salesID !== null) {
         url = config.apiBaseUrl + config.apiFindSoldUnitsBySalesId;
         id = self.salesId;
     } else {
         url = config.apiBaseUrl + config.apiFindSoldUnitsByUserId;
-        id = self.userId;
+        id = self.user.UserID;
     }
     $http.get(url, {
         params: {
@@ -166,7 +159,7 @@ app.controller('UnitsController', function ($scope, $http, localStorageService) 
                 params: {
                     id: lots.unitID
                 },
-                lots:lots
+                lots: lots
             }).
             success(function (data, status, headers, _config) {
                 _config.lots.pdfs = data;

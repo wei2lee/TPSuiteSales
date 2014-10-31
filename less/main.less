@@ -1,5 +1,4 @@
 // out: ../css/main.css, compress: false, strictMath: false
-
  html {
     margin: 0;
     padding: 0;
@@ -21,16 +20,16 @@ body {
     display: table-cell;
     vertical-align: middle;
 }
-
-.hiddenRow { padding:0 !important; }
-
+.hiddenRow {
+    padding: 0 !important;
+}
 //login
 #login-container {
     height: 100%;
     form {
         height: 260px;
         .btn {
-            min-width: 80px;
+            min-width: 160px;
         }
     }
 }
@@ -40,7 +39,7 @@ body {
             > .form-group {
                 max-width: 998px;
                 > label {
-                    max-width: 170px;
+                    max-width: 160px;
                 }
             }
         }
@@ -54,32 +53,33 @@ body {
         fieldset {
             > .form-group {
                 max-width: 1100px;
-                
                 > label:first-child {
                     max-width: 160px;
                     text-align: left;
                 }
-                > div {
-
-                }
+                > div {}
             }
         }
         .btn {
             min-width: 80px;
         }
-        
         #payment-method-form-group {
             .form-group {
                 label:first-child {
-                    text-align: left; 
-                    max-width:10px;
+                    text-align: left;
+                    max-width: 10px;
                 }
             }
         }
+        [data-bv-icon-for="dob"], [data-bv-icon-for="earnestDepositDate"] {
+            right:56px;   
+        }
+    }
+}
+#units-container {
+    .hiddenRow {
+        padding: 0 !important;
     }
 }
 
-#units-container {
-    .hiddenRow:{ padding: 0 !important; }
-}
 

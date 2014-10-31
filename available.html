@@ -21,10 +21,7 @@
     <link rel="stylesheet" href="bower_components/select2/select2.css">
     <link rel="stylesheet" href="bower_components/select2/select2-bootstrap.css">
     <link rel="stylesheet" href="bower_components/bootstrap-datepicker/css/datepicker3.css">
-    <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!--<link rel="stylesheet" href="css/normalize.css">-->
     <link rel="stylesheet" href="css/main.css">
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
@@ -67,7 +64,7 @@
                         <a href="form.html"> Home </a>
                     </li>
                     <li>
-                        <a href="showpdf.html"> Sold Units </a>
+                        <a href="units.html"> Sold Units </a>
                     </li>
                     <li>
                         <a href="index.html"> Sign Out </a>
@@ -81,7 +78,7 @@
             
             <div class="container-fluid" id="available-container">
                 <div class="row">
-                    <form class="form-horizontal" ng-controller="BookingFormController as booking">
+                    <form class="form-horizontal" ng-controller="BookingFormController">
                         <fieldset>
                             <!-- Form Name -->
                             <legend>Select total lot to purchase</legend>
@@ -90,7 +87,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="nationality">Nationality</label>
                                 <div class="col-md-6">
-                                    <select disable-search id="nationality" name="nationality" class="form-control"  ng-model='booking.nationality'>
+                                    <select disable-search id="nationality" name="nationality" class="form-control"  ng-model='nationality'>
                                         <option selected value="Malaysian">Malaysian</option>
                                         <option value="Foreigner">Foreigner</option>
                                     </select>
@@ -101,14 +98,14 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="availableLot">Available Lot</label>
                                 <div class="col-md-6">
-                                    <input disabled id="availableLot-input" name="availableLot" type="text" placeholder="" class="form-control input-md" value='{{ booking.getAvailableLotCount() }}'>
+                                    <input disabled id="availableLot-input" name="availableLot" type="text" placeholder="" class="form-control input-md" value='{{ getAvailableLotCount() }}'>
                                 </div>
                             </div>
                             <!-- Select Basic -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="totalLot">Total Lot Selected</label>
                                 <div class="col-md-6">
-                                    <select disable-search id="totalLot" name="totalLot" class="form-control" ng-model='booking.totalLot'>
+                                    <select disable-search id="totalLot" name="totalLot" class="form-control" ng-model='totalLot'>
                                         <option selected value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -121,21 +118,21 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="amount">Amount</label>
                                 <div class="col-md-6">
-                                    <input disabled id="amount" name="amount" type="text" placeholder="" class="form-control input-md" value='{{booking.getAmount() | currency:booking.currency+" ":2}}'>
+                                    <input disabled id="amount" name="amount" type="text" placeholder="" class="form-control input-md" value='{{getAmount() | currency:currency+" ":2}}'>
                                 </div>
                             </div>
                             <!-- Select Basic -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="currency">Currency</label>
                                 <div class="col-md-2">
-                                    <select disable-search id="currency" name="currency" class="form-control"  ng-model='booking.currency'>
+                                    <select disable-search id="currency" name="currency" class="form-control"  ng-model='currency'>
                                         <option value="MYR">MYR</option>
                                         <option value="SGD">SGD</option>
                                     </select>
                                 </div>
                                 <label class="col-md-4 control-label" for="conversionRate">Conversion Rate</label>
                                 <div class="col-md-2">
-                                    <input disabled id="conversionRate" name="conversionRate" type="text" placeholder="" class="form-control input-md" value='{{booking.conversionRate}}'>
+                                    <input disabled id="conversionRate" name="conversionRate" type="text" placeholder="" class="form-control input-md" value='{{conversionRate}}'>
                                 </div>
                             </div>
 
@@ -143,8 +140,8 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="calculator-btn"></label>
                                 <div class="col-md-8">
-                                    <a id="calculator-btn" name="calculator-btn" class="btn btn-default" href='calculator.html'>Calculator</a>
-                                    <a id="proceed-btn" name="proceed-btn" class="btn btn-default" href='form.html'>Proceed</a>
+                                    <a id="calculator-btn" ng-click='saveData()' name="calculator-btn" class="btn btn-default" href='calculator.html'>Calculator</a>
+                                    <a id="proceed-btn" ng-click='saveData()' name="proceed-btn" class="btn btn-default" href='form.html'>Proceed</a>
                                 </div>
                             </div>
 
@@ -173,10 +170,10 @@
     <script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="bower_components/bootbox/bootbox.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/main.js"></script>
+    
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>

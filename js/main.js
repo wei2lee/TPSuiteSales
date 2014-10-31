@@ -1,17 +1,22 @@
 $(document).ready(function () {
 
-    $('select').select2({
-        minimumResultsForSearch: -1
-    });
-    $('.datetimepicker').datepicker({
-        endDate: new Date(),
-        startView: "decade",
-        autoclose: true,
-        format: "dd/mm/yyyy"
-    });
+    console.log(window.localStorage);
 
+    if ($('select').length) {
+        $('select').select2({
+            minimumResultsForSearch: -1
+        });
+    }
+    if ($('.datetimepicker').length) {
+        $('.datetimepicker').datepicker({
+            endDate: new Date(),
+            startView: "decade",
+            autoclose: true,
+            format: "dd/mm/yyyy"
+        });
+    }
     if ($('#login-container').length) {
-
+        store('user', null);
         var $loginform = $('#login-container').find('form');
         $loginform.bootstrapValidator({
             feedbackIcons: {
@@ -20,7 +25,7 @@ $(document).ready(function () {
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-                'username-input': {
+                'UserName': {
                     message: 'The username is not valid',
                     validators: {
                         notEmpty: {
@@ -28,7 +33,7 @@ $(document).ready(function () {
                         }
                     }
                 },
-                'password-input': {
+                'Password': {
                     validators: {
                         notEmpty: {
                             message: 'The password is required and cannot be empty'
@@ -40,27 +45,24 @@ $(document).ready(function () {
             evt.preventDefault();
             var $form = $(evt.target);
             var bv = $form.data('bootstrapValidator');
-            console.log(config);
-            console.log(config.apiBaseUrl + config.apiLogin);
             $.ajax({
                 url: config.apiBaseUrl + config.apiLogin,
                 type: 'POST',
                 data: $form.serialize(),
                 dataType: 'json'
             }).done(function (data, textStatus, jqXHR) {
-                if (data.status == "Error") {
+                if (data.Status == "Error") {
                     bootbox.alert("Login encounter an error.<br>Response : " + data);
                     bv.resetForm(true);
                     return;
                 }
-                if (data.status == "NotFound") {
+                if (data.Status == "NotFound") {
                     bootbox.alert("No user is matched with password.");
                     bv.resetForm(true);
                     return;
                 }
-                if (data.status != "Success") {
-                    window.location = "admin.html";
-                }
+                store('user', data);
+                window.location = "available.html";
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 bootbox.alert("Login encounter an error.<br>status : " + textStatus + "<br>error : " + errorThrown);
                 bv.resetForm(true);
@@ -70,17 +72,23 @@ $(document).ready(function () {
         $loginform.find('#reset-btn').click(function () {
             $loginform.data('bootstrapValidator').resetForm();
         });
-
     }
 
     if ($('#available-container').length) {
-
-
-
-
+        store('salesID', null);
+        $('#proceed-btn, #calculator-btn').click(function () {
+            var $scope = angular.element($('[ng-controller=BookingFormController]')[0]).scope();
+            var booking = store('booking');
+            booking.totalLot = $scope.totalLot;
+            booking.nationality = $scope.nationality;
+            booking.currency = $scope.currency;
+            store('booking', booking);
+            console.log(store('booking'));
+        });
     }
 
     if ($('#purchase-form-container').length) {
+        store('salesID', null);
         var $purchaseform = $('#purchase-form-container').find('form');
         $purchaseform.bootstrapValidator({
             feedbackIcons: {
@@ -134,7 +142,7 @@ $(document).ready(function () {
                 'mobile': {
                     validators: {
                         notEmpty: {
-                            message: 'The hand phone number is required and cannot be empty'
+                            message: 'The mobile number is required and cannot be empty'
                         }
                     }
                 },
@@ -145,53 +153,50 @@ $(document).ready(function () {
                         }
                     }
                 },
-                'earnestDepositDate': {
-//                    validators: {
-//                        notEmpty: {
-////                            message: 'The earnest deposit date is required and cannot be empty'
-//                            message: ''
-//                        }
-//                    }
-                },
                 'paymentAmount1': {
-//                    validators: {
-//                        notEmpty: {
-////                            message: 'The payment amount(1) is required and cannot be empty'
-//                            message: ''
-//                        }
-//                    }
+                    validators: {
+                        notEmpty: {
+                            message: 'The payment amount(1) is required and cannot be empty'
+                        }
+                    }
                 }
             }
         }).on('success.form.bv', function (evt) {
             evt.preventDefault();
             var $form = $(evt.target);
             var bv = $form.data('bootstrapValidator');
-            console.log(config);
-            console.log(config.apiBaseUrl + config.apiLogin);
+
+            console.log($form.serialize());
+            return;
+
             $.ajax({
                 url: config.apiBaseUrl + config.apiLogin,
                 type: 'POST',
                 data: $form.serialize(),
                 dataType: 'json'
             }).done(function (data, textStatus, jqXHR) {
-                if (data.status == "Error") {
-                    bootbox.alert("Login encounter an error.<br>Response : " + data);
+                if (data.Status == "Error") {
+                    bootbox.alert("Submit encounter an error.<br>Response : " + data);
                     bv.resetForm(true);
                     return;
                 }
-                if (data.status == "NotFound") {
-                    bootbox.alert("No user is matched with password.");
-                    bv.resetForm(true);
-                    return;
-                }
-                if (data.status != "Success") {
-                    window.location = "admin.html";
+                if (data.Status == "Success") {
+                    store('salesID', data.salesID);
+                    window.location = "units.html";
                 }
             }).fail(function (jqXHR, textStatus, errorThrown) {
-                bootbox.alert("Login encounter an error.<br>status : " + textStatus + "<br>error : " + errorThrown);
+                bootbox.alert("Submit encounter an error.<br>status : " + textStatus + "<br>error : " + errorThrown);
                 bv.resetForm(true);
                 return;
             });
+        });
+        
+
+        $('.datetimepicker').on('changeDate show', function (e) {
+            // Revalidate the date when user change it
+            $form = $(this).closest();
+            console.log($(this).find('input').attr('name'));
+            $form.bootstrapValidator('revalidateField', $(this).find('input').attr('name'));
         });
     }
 

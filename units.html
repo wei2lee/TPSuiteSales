@@ -69,7 +69,7 @@
                         <a href="form.html"> Home </a>
                     </li>
                     <li class="active">
-                        <a href="showpdf.html"> Sold Units </a>
+                        <a href="units.html"> Sold Units </a>
                     </li>
                     <li>
                         <a href="index.html"> Sign Out </a>
@@ -95,13 +95,11 @@
                                 <td>{{ lot.agentName }}</td>
                                 <td>{{ lot.soldDate }}</td>
                             </tr>
-                            
-                                <tr ng-repeat-start='pdf in lot.pdfs'>
-                                    <td style='padding-left:40px;' colspan=3><a href='{{pdf.PdfUrl}}' target='_blank'>{{ pdf.Type }}</a>
-                                    </td>
-                                </tr>
-                                <tr ng-repeat-end ng-hide="true"></tr>
-                            
+                            <tr ng-repeat-start='pdf in lot.pdfs'>
+                                <td style='padding-left:40px;' colspan=3><a href='{{pdf.PdfUrl}}' target='_blank'>{{ pdf.Type }}</a>
+                                </td>
+                            </tr>
+                            <tr ng-repeat-end ng-hide="true"></tr>
                             <tr ng-repeat-end ng-hide="true"></tr>
                         </tbody>
                     </table>

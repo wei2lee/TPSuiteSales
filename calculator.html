@@ -68,7 +68,7 @@
                         <a href="available.html"> Home </a>
                     </li>
                     <li>
-                        <a href="showpdf.html"> Sold Units </a>
+                        <a href="units.html"> Sold Units </a>
                     </li>
                     <li>
                         <a href="index.html"> Sign Out </a>
@@ -82,7 +82,7 @@
 
             <div class="container-fluid" id="available-container">
                 <div class="row">
-                    <form class="form-horizontal" ng-controller="BookingFormController as booking">
+                    <form class="form-horizontal" ng-controller="BookingFormController">
                         <fieldset>
 
                             <!-- Form Name -->
@@ -92,7 +92,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="amount">Amount</label>
                                 <div class="col-md-4">
-                                    <input disabled id="amount" name="amount" type="text" placeholder="" class="form-control input-md" value='{{ booking.getAmount() | currency:booking.currency+" ":2 }}'>
+                                    <input disabled id="amount" name="amount" type="text" placeholder="" class="form-control input-md" value='{{ getAmount() | currency:currency+" ":2 }}'>
                                 </div>
                             </div>
 
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="return">Return 6%<br><small>(1st-5th year)</small></label>
                                 <div class="col-md-4">
-                                    <input disabled id="return" name="return" type="text" placeholder="" class="form-control input-md" value='{{ booking.getTotalInterest() | currency:booking.currency+" ":2 }}'>
+                                    <input disabled id="return" name="return" type="text" placeholder="" class="form-control input-md" value='{{ getTotalInterest() | currency:currency+" ":2 }}'>
 
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="interest">Interest</label>
                                 <div class="col-md-4">
-                                    <input disabled id="interest" name="interest" type="text" placeholder="" class="form-control input-md" value='{{ booking.getInterestPerYear() | currency:booking.currency+" ":2 }}'>
+                                    <input disabled id="interest" name="interest" type="text" placeholder="" class="form-control input-md" value='{{ getInterestPerYear() | currency:currency+" ":2 }}'>
 
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="total-return">Total Return</label>
                                 <div class="col-md-4">
-                                    <input disabled id="total-return" name="total-return" type="text" placeholder="" class="form-control input-md" value='{{ booking.getTotalReturn() | currency:booking.currency+" ":2 }}'>
+                                    <input disabled id="total-return" name="total-return" type="text" placeholder="" class="form-control input-md" value='{{ getTotalReturn() | currency:currency+" ":2 }}'>
 
                                 </div>
                             </div>

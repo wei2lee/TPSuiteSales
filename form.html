@@ -67,7 +67,7 @@
                         <a href="form.html"> Home </a>
                     </li>
                     <li>
-                        <a href="showpdf.html"> Sold Units </a>
+                        <a href="units.html"> Sold Units </a>
                     </li>
                     <li>
                         <a href="index.html"> Sign Out </a>
@@ -81,7 +81,7 @@
 
             <div class="container-fluid" id="purchase-form-container">
                 <div class="row">
-                    <form class="form-horizontal" ng-controller="BookingFormController as booking">
+                    <form class="form-horizontal" ng-controller="BookingFormController">
                         <fieldset>
 
                             <!-- Form Name -->
@@ -91,7 +91,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="sqf">Sq.ft.</label>
                                 <div class="col-md-6">
-                                    <input disabled id="sqf" name="sqf" type="text" placeholder="" class="form-control input-md" value='{{booking.sqf}}'>
+                                    <input disabled id="sqf" name="sqf" type="text" placeholder="" class="form-control input-md" value='{{sqf}}'>
 
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="totalLot">Total Lot *</label>
                                 <div class="col-md-6">
-                                    <select disable-search id="totalLot" name="totalLot" class="form-control" ng-model='booking.totalLot'>
+                                    <select disable-search id="totalLot" name="totalLot" class="form-control" ng-model='totalLot'>
                                         <option selected value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -114,21 +114,21 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="amount">Amount</label>
                                 <div class="col-md-6">
-                                    <input disabled id="amount" name="amount" type="text" placeholder="" class="form-control input-md" value="{{booking.getAmount() | currency:'':2}}">
+                                    <input disabled id="amount" name="amount" type="text" placeholder="" class="form-control input-md" value="{{getAmount() | currency:'':2}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="currency">Currency</label>
                                 <div class="col-md-2">
-                                    <select disable-search id="currency" name="currency" class="form-control" ng-model='booking.currency'>
+                                    <select disable-search id="currency" name="currency" class="form-control" ng-model='currency'>
                                         <option value="MYR">MYR</option>
                                         <option value="SGD">SGD</option>
                                     </select>
                                 </div>
                                 <label class="col-md-2 control-label" for="conversionRate">Conversion Rate</label>
                                 <div class="col-md-2">
-                                    <input disabled id="conversionRate" name="conversionRate" type="text" placeholder="" class="form-control input-md" value='{{booking.conversionRate}}'>
+                                    <input disabled id="conversionRate" name="conversionRate" type="text" placeholder="" class="form-control input-md" value='{{conversionRate}}'>
                                 </div>
                             </div>
 
@@ -136,7 +136,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="name">Name *</label>
                                 <div class="col-md-6">
-                                    <input id="name" name="name" type="text" placeholder="" class="form-control input-md"  ng-model="booking.name">
+                                    <input id="name" name="name" type="text" placeholder="" class="form-control input-md"  ng-model="name">
 
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="nric">NRIC/Password *</label>
                                 <div class="col-md-6">
-                                    <input id="nric" name="nric" type="text" placeholder="" class="form-control input-md"  ng-model="booking.nric">
+                                    <input id="nric" name="nric" type="text" placeholder="" class="form-control input-md"  ng-model="nric">
 
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="gender">Gender</label>
                                 <div class="col-md-6">
-                                    <select id="gender" name="gender" class="form-control" ng-model="booking.gender">
+                                    <select id="gender" name="gender" class="form-control" ng-model="gender">
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
@@ -166,7 +166,7 @@
                                 <label class="col-md-4 control-label" for="dob">Birthdate *</label>
                                 <div class="col-md-6">
                                     <div class='input-group date datetimepicker'>
-                                        <input type='text' name='dob' class="form-control" required="" ng-model="booking.dob" />
+                                        <input type='text' name='dob' class="form-control" ng-model="dob" />
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
@@ -177,7 +177,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="nationality">Nationality</label>
                                 <div class="col-md-6">
-                                    <select id="nationality" name="nationality" class="form-control" ng-model="booking.nationality">
+                                    <select id="nationality" name="nationality" class="form-control" ng-model="nationality">
                                         <option value="Malaysian">Malaysian</option>
                                         <option value="Foreigner">Foreigner</option>
                                     </select>
@@ -188,7 +188,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="maritalStatus">Martial Status</label>
                                 <div class="col-md-6">
-                                    <select id="maritalStatus" name="maritalStatus" class="form-control" ng-model="booking.maritalStatus">
+                                    <select id="maritalStatus" name="maritalStatus" class="form-control" ng-model="maritalStatus">
                                         <option value="Single">Single</option>
                                         <option value="Married">Married</option>
                                     </select>
@@ -199,7 +199,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="address1">Address 1 *</label>
                                 <div class="col-md-6">
-                                    <input id="address1" name="address1" type="text" placeholder="" class="form-control input-md" required="" ng-model="booking.address1">
+                                    <input id="address1" name="address1" type="text" placeholder="" class="form-control input-md" ng-model="address1">
 
                                 </div>
                             </div>
@@ -208,7 +208,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="address2">Address 2 *</label>
                                 <div class="col-md-6">
-                                    <input id="address2" name="address2" type="text" placeholder="" class="form-control input-md" required="" ng-model="booking.address2">
+                                    <input id="address2" name="address2" type="text" placeholder="" class="form-control input-md" ng-model="address2">
 
                                 </div>
                             </div>
@@ -217,7 +217,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="address3">Address 3</label>
                                 <div class="col-md-6">
-                                    <input id="address3" name="address3" type="text" placeholder="" class="form-control input-md" ng-model="booking.address3">
+                                    <input id="address3" name="address3" type="text" placeholder="" class="form-control input-md" ng-model="address3">
 
                                 </div>
                             </div>
@@ -226,7 +226,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="city">City</label>
                                 <div class="col-md-6">
-                                    <input id="city" name="city" type="text" placeholder="" class="form-control input-md" ng-model="booking.city">
+                                    <input id="city" name="city" type="text" placeholder="" class="form-control input-md" ng-model="city">
 
                                 </div>
                             </div>
@@ -235,7 +235,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="state">State *</label>
                                 <div class="col-md-6">
-                                    <input id="state" name="state" type="text" placeholder="" class="form-control input-md" ng-model="booking.state">
+                                    <input id="state" name="state" type="text" placeholder="" class="form-control input-md" ng-model="state">
 
                                 </div>
                             </div>
@@ -244,7 +244,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="postCode">Post Code *</label>
                                 <div class="col-md-6">
-                                    <input id="postCode" name="postCode" type="text" placeholder="" class="form-control input-md" required="" ng-model="booking.postCode">
+                                    <input id="postCode" name="postCode" type="text" placeholder="" class="form-control input-md" ng-model="postCode">
 
                                 </div>
                             </div>
@@ -253,7 +253,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="phone">Office / House Contact</label>
                                 <div class="col-md-6">
-                                    <input id="phone" name="phone" type="text" placeholder="" class="form-control input-md" ng-model="booking.phone">
+                                    <input id="phone" name="phone" type="text" placeholder="" class="form-control input-md" ng-model="phone">
 
                                 </div>
                             </div>
@@ -262,7 +262,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="mobile">H / P *</label>
                                 <div class="col-md-6">
-                                    <input id="mobile" name="mobile" type="text" placeholder="" class="form-control input-md" required="" ng-model="booking.mobile">
+                                    <input id="mobile" name="mobile" type="text" placeholder="" class="form-control input-md" ng-model="mobile">
 
                                 </div>
                             </div>
@@ -271,7 +271,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="email">Email</label>
                                 <div class="col-md-6">
-                                    <input id="email" name="email" type="text" placeholder="" class="form-control input-md" ng-model="booking.email">
+                                    <input id="email" name="email" type="text" placeholder="" class="form-control input-md" ng-model="email">
                                 </div>
                             </div>
 
@@ -279,12 +279,12 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="earnestDepositAmount">Earnest Deposit</label>
                                 <div class="col-md-2">
-                                    <input disabled id="earnestDepositAmount" name="earnestDepositAmount" type="text" placeholder="" class="form-control input-md" value="{{booking.getEarnestDepositAmount() | currency:'':2}}">
+                                    <input disabled id="earnestDepositAmount" name="earnestDepositAmount" type="text" placeholder="" class="form-control input-md" value="{{getEarnestDepositAmount() | currency:'':2}}">
                                 </div>
-                                <label class="col-md-2 control-label" for="earnestDepositDate">Date</label>
-                                <div class="col-md-2">
+                                <label class="col-md-1 control-label" for="earnestDepositDate">Date</label>
+                                <div class="col-md-3">
                                     <div class='input-group date datetimepicker'>
-                                        <input type='text' name='earnestDepositDate' class="form-control" ng-model="booking.earnestDepositDate" />
+                                        <input type='text' name='earnestDepositDate' class="form-control" ng-model="earnestDepositDate" />
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
@@ -297,7 +297,7 @@
                             </div>
                             <div class="form-group" id="payment-method-form-group">
                                 <div class="col-md-9">
-                                    <div class="form-group " ng-repeat='payment in booking.payments'>
+                                    <div class="form-group " ng-repeat='payment in payments'>
 
                                         <label class="col-xs-1 control-label" for="{{'paymentType' + ($index+1)}}">{{$index+1}})</label>
                                         <div class="col-xs-3">
@@ -339,7 +339,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="remark">Remark</label>
                                 <div class="col-md-6">
-                                    <textarea rows=5 id="remark" name="remark" type="text" placeholder="" class="form-control input-md" ng-model="booking.remark"></textarea>
+                                    <textarea rows=5 id="remark" name="remark" type="text" placeholder="" class="form-control input-md" ng-model="remark"></textarea>
                                 </div>
                             </div>
 
@@ -347,7 +347,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="soldBy">Sold By</label>
                                 <div class="col-md-6">
-                                    <input disabled id="soldBy" name="soldBy" type="text" placeholder="" class="form-control input-md" value='{{booking.getSoldByName()}}'>
+                                    <input disabled id="soldBy" name="soldBy" type="text" placeholder="" class="form-control input-md" value='{{getSoldByName()}}'>
 
                                 </div>
                             </div>

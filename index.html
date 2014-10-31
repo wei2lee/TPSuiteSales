@@ -17,6 +17,10 @@
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/bootstrapValidator/dist/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" href="bower_components/select2/select2.css">
+    <link rel="stylesheet" href="bower_components/select2/select2-bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/css/datepicker3.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
@@ -32,16 +36,16 @@
             <form class="form-horizontal" method="POST" action="javascript:void(0)">
                 <fieldset>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="username-input">Username</label>
+                        <label class="col-md-4 control-label" for="UserName">Username</label>
                         <div class="col-md-4">
-                            <input id="username-input" name="username-input" type="text" placeholder="" class="form-control input-md" required="">
+                            <input id="username-input" name="UserName" type="text" placeholder="" class="form-control input-md" required="">
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="password-input">Password</label>
+                        <label class="col-md-4 control-label" for="Password">Password</label>
                         <div class="col-md-4">
-                            <input id="password-input" name="password-input" type="password" placeholder="" class="form-control input-md">
+                            <input id="password-input" name="Password" type="password" placeholder="" class="form-control input-md">
 
                         </div>
                     </div>
@@ -52,11 +56,11 @@
                             <button id="submit-btn" name="submit-btn" type="submit" class="btn btn-default">Submit</button>
                         </div>
                     </div>
-
                 </fieldset>
             </form>
         </div>
     </div>
+
     <script src="js/config.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script>
@@ -65,7 +69,9 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/bootstrapValidator/dist/js/bootstrapValidator.min.js"></script>
     <script src="bower_components/bootbox/bootbox.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="js/plugins.js"></script>
+    <script src="js/app.js"></script>
     <script src="js/main.js"></script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

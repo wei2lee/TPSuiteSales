@@ -30,13 +30,13 @@ body {
   height: 260px;
 }
 #login-container form .btn {
-  min-width: 80px;
+  min-width: 160px;
 }
 #available-container form fieldset > .form-group {
   max-width: 998px;
 }
 #available-container form fieldset > .form-group > label {
-  max-width: 170px;
+  max-width: 160px;
 }
 #available-container form .btn {
   min-width: 120px;
@@ -54,4 +54,11 @@ body {
 #purchase-form-container form #payment-method-form-group .form-group label:first-child {
   text-align: left;
   max-width: 10px;
+}
+#purchase-form-container form [data-bv-icon-for="dob"],
+#purchase-form-container form [data-bv-icon-for="earnestDepositDate"] {
+  right: 56px;
+}
+#units-container .hiddenRow {
+  padding: 0 !important;
 }
